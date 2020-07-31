@@ -102,7 +102,7 @@ int TCMuxShield::getTCData(void)
     // If the sign bit is set, the value is negative. Take 2's complement
     if (tc_data >> MAX31855_14B_SIGN_OFFSET)
         tc_data -= 16384;
-    // Scale down because MSB is 2^-2
+    // Scale down because LSB is 2^-2
     float tc_temp = (tc_data/4);
 
     // Extract internal temperature
@@ -110,7 +110,7 @@ int TCMuxShield::getTCData(void)
     // If the sign bit is set, the value is negative. Take 2's complement
     if (int_data >> MAX31855_12B_SIGN_OFFSET)
         int_data -= 4096;
-    // Scale down because MSB is 2^-4
+    // Scale down because LSB is 2^-4
     float int_temp = (int_data/16);
 
     temperature = linearizeTC(tc_temp, int_temp);
